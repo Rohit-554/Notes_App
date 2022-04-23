@@ -1,11 +1,13 @@
 package com.example.notes_app
 
 import android.content.Context
+import android.media.Image
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Adapter
 import android.widget.Button
+import android.widget.ImageButton
 import android.widget.TextView
 import androidx.appcompat.view.menu.ActionMenuItemView
 import androidx.recyclerview.widget.RecyclerView
@@ -18,13 +20,13 @@ class NotesRVadapter(private val context:Context, private val listener: MainActi
 
     inner class NoteViewHolder(itemView: View):RecyclerView.ViewHolder(itemView){
     val textView:TextView = itemView.findViewById(R.id.text)
-        val deleteBtn:Button = itemView.findViewById(R.id.delete_btn)
-
+        val deleteBtn: View? = itemView.findViewById(R.id.delete_btn)
+        
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NoteViewHolder {
         val ViewHolder = NoteViewHolder(LayoutInflater.from(context).inflate(R.layout.item_note,parent,false))
-        ViewHolder.deleteBtn.setOnClickListener {
+        ViewHolder.deleteBtn?.setOnClickListener {
             listener.onItemClicked(allNotes[ViewHolder.adapterPosition])
         }
         return ViewHolder
